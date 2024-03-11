@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watch Image</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<style>
+    #watchedImage {
+        display: block;
+        margin: 0 auto;
+        width: 35%;
+    }
+
+    .like-share-container .share-button {
+        color: white;
+        background-color: red;
+        border-radius: 10%;
+        padding: 0.3% 0.5%;
+
+    }
+
+    .like-share-container {
+        margin-top: 1%;
+
+    }
+
+    #shareButton {
+        font-size: 1.5em;
+
+
+    }
+</style>
+
+</html>
+<div>
+        <img id="watchedImage" src="" alt="Watched Image">
+    <div class="like-share-container" style="display: flex; justify-content: center;">
+        <i class="fa-solid fa-heart " id="likeButton" onclick="red()" ondblclick="black()"style="margin-right: 0.4%; font-size: 1.5em;"></i>
+        <button class="share-button" onclick="share()" style="margin-right: 0.2em;">Share</button>
+
+        <i class="fa-brands fa-facebook" id="shareButton" style="display: none; color: #365899;"></i>
+    
+    </div>
+    
+</div>
+<script>
+    const likeButton = document.getElementById('likeButton'); const shareButton = document.getElementById('shareButton');
+    let isLiked = false;
+
+    likeButton.addEventListener('click', () => { isLiked = !isLiked; likeButton.classList.toggle('liked'); });
+
+    shareButton.addEventListener('click', () => {
+        const imageUrl = document.getElementById('watchedImage').src; const imageDescription = document.getElementById('watchedImage').alt;
+
+
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${imageUrl}&t=${imageDescription}`);
+        
+    });
+
+    window.onload = function () {
+        const urlParams = new URLSearchParams(window.location.search); const imageUrl = urlParams.get('image');
+        if (imageUrl) { document.getElementById('watchedImage').src = imageUrl; }
+        else {
+            // Handle case where no image URL is provided 
+            console.error('No image URL provided');
+        }
+    }
+    function red() {
+        document.getElementsByTagName("i")[0].style.color = "red";
+    }
+    function black(){
+        document.getElementsByTagName("i")[0].style.color = "black";
+    }
+    function share() {
+        let icons = document.getElementsByTagName("i");
+
+        for (let i = 0; i < icons.length; i++) {
+            icons[i].style.display = "block";
+        }
+    }
+</script>
+</body>
+
+</html>
